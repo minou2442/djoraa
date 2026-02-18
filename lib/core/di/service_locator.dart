@@ -7,6 +7,9 @@ import '../services/api_service.dart';
 import '../services/storage_service.dart';
 import '../services/logger_service.dart';
 import '../auth/auth_session_controller.dart';
+import '../repositories/appointment_repository.dart';
+import '../repositories/prescription_repository.dart';
+import '../repositories/patient_repository.dart';
 
 final getIt = GetIt.instance;
 
@@ -68,6 +71,19 @@ Future<void> setupServiceLocator() async {
   // Initialize Auth Session
   getIt.registerSingleton<AuthSessionController>(
     AuthSessionController.instance,
+  );
+
+  // Initialize Repositories
+  getIt.registerSingleton<AppointmentRepository>(
+    AppointmentRepository(getIt<ApiService>()),
+  );
+
+  getIt.registerSingleton<PrescriptionRepository>(
+    PrescriptionRepository(getIt<ApiService>()),
+  );
+
+  getIt.registerSingleton<PatientRepository>(
+    PatientRepository(getIt<ApiService>()),
   );
 
   getIt<LoggerService>().logInfo('Service Locator initialized successfully');
