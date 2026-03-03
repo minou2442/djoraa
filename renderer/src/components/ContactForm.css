@@ -1,0 +1,4 @@
+/* ContactForm uses same modal styles - just include padding */
+.contact-form {
+  padding: 20px;
+}

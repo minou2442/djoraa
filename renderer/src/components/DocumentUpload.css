@@ -1,0 +1,8 @@
+/* DocumentUpload shares modal styles */
+.document-upload-form {
+  padding: 20px;
+}
+
+.form-group.full-width input[type="file"] {
+  padding: 4px;
+}

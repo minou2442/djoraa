@@ -1,0 +1,115 @@
+{
+  "name": "djoraa-erp-desktop",
+  "version": "0.1.0",
+  "description": "DJORAA - Plateforme Médicale Intégrée (Integrated Medical Platform)",
+  "main": "main.js",
+  "homepage": "https://github.com/yourusername/djoraa",
+  "author": {
+    "name": "DJORAA Team",
+    "email": "team@djoraa.com"
+  },
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux",
+    "build:all": "electron-builder --mac --win --linux",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^25.0.0",
+    "electron-builder": "^24.6.4"
+  },
+  "dependencies": {
+    "electron-updater": "^6.1.1"
+  },
+  "build": {
+    "appId": "com.djoraa.erp",
+    "productName": "DJORAA ERP",
+    "directories": {
+      "buildResources": "assets",
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "index.html",
+      "renderer/dist/**/*",
+      "node_modules/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [ "x64" ]
+        },
+        {
+          "target": "portable",
+          "arch": [ "x64" ]
+        }
+      ],
+      "certificateFile": "${CSC_LINK}",
+      "certificatePassword": "${CSC_KEY_PASSWORD}",
+      "signingHashAlgorithms": [ "sha256" ],
+      "sign": "./scripts/sign.js"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "DJORAA ERP"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.medical",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "entitlements.mac.plist",
+      "entitlementsInherit": "entitlements.mac.plist",
+      "certificateFile": "${CSC_LINK}",
+      "certificatePassword": "${CSC_KEY_PASSWORD}",
+      "signingIdentity": "Apple Development"
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 440,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Utility",
+      "maintainer": "DJORAA Team <team@djoraa.com>"
+    },
+    "deb": {
+      "depends": [ "gconf2", "gconf-service", "libappindicator1", "libnotify4", "libxtst6", "libnss3" ]
+    },
+    "appImage": {
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "yourusername",
+      "repo": "djoraa",
+      "releaseType": "release"
+    }
+  }
+}

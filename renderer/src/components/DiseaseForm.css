@@ -1,0 +1,4 @@
+/* DiseaseForm uses the same modal styles as AllergyForm and InsuranceForm */
+.disease-form {
+  padding: 20px;
+}

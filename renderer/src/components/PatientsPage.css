@@ -1,0 +1,10 @@
+.patients-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #fafafa;
+}
+
+.patients-container {
+  width: 100%;
+  height: 100%;
+}
